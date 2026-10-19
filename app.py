@@ -13,7 +13,7 @@ st.set_page_config(
 # Load the trained Random Forest pipeline
 @st.cache_resource
 def load_model():
-    return joblib.load("model.pkl")
+    return joblib.load("model (4).pkl")
 
 model = load_model()
 
