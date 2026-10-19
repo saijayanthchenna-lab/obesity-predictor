@@ -67,27 +67,30 @@ with st.form("obesity_details"):
     )
 
 # Prediction
+
+# Prediction
 if submitted:
     input_data = pd.DataFrame([{
         "Age": age,
-        "Gender": gender,
         "Height": height,
-        "Weight": weight
+        "Weight": weight,
+        "Gender_Female": 1 if gender == "Female" else 0,
+        "Gender_Male": 1 if gender == "Male" else 0
     }])
 
     try:
         prediction = model.predict(input_data)[0]
 
         st.success("Prediction completed!")
-        st.metric(
-            "Predicted Category",
-            str(prediction)
-        )
+        st.metric("Predicted Category", str(prediction))
 
         st.caption(
             "This is a machine learning estimate, "
             "not a medical diagnosis."
         )
+
+    except Exception as e:
+        st.error(f"Prediction failed: {e}")
 
     except Exception as e:
         st.error(f"Prediction failed: {e}")
